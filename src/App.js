@@ -4,19 +4,14 @@ import * as U from 'karet.util';
 import * as R from 'kefir.ramda';
 import * as L from 'kefir.partial.lenses';
 
-const not = x => !x;
-
-const observeEvent = (type, source) => U.thru(
-  source,
-  U.flatMapLatest(el => K.fromEvents(el, type).toProperty()),
-);
+import { not, observeEvent } from './utils';
 
 const state = U.atom({
   style: {
     width: 200,
     height: 300,
     left: 200,
-    top: 300,  
+    top: 300,
   },
   locked: true,
   moving: true,
@@ -24,14 +19,15 @@ const state = U.atom({
 
 //
 
-function App() {
+function App({ docEvents }) {
   const doc = K.constant(window);
   const ref = U.variable();
   const { style } = U.destructure(state);
-  
+
   const drag = observeEvent('mousemove', ref);
 
   const refClick = observeEvent('mousedown', ref).toProperty();
+  const refClickEnd = observeEvent('mouseup', ref).toProperty();
 
   const takeProps = ps => obs => U.thru(
     obs,
@@ -40,12 +36,38 @@ function App() {
     U.mapValue(R.values),
   );
 
-  const a = takeProps(['pageX', 'pageY'])(refClick);
-  const b = takeProps(['offsetX', 'offsetY'])(refClick);
-  const c = U.combine([a, b], R.pipe(R.zip, R.map(R.apply(R.subtract))));
-  
+  // Coordinates where clicked on the page
+  const refClickPXY = takeProps(['pageX', 'pageY'])(refClick);
+
+  // Coordinates where clicked on the ref
+  const refClickRXY = takeProps(['offsetX', 'offsetY'])(refClick);
+
+  // Coordinates of ref's upper left corner
+  const refOrigo = U.combine([refClickPXY, refClickRXY], R.pipe(R.zip, R.map(R.apply(R.subtract))));
+
+  const dragg = U.thru(
+    refClick,
+    U.flatMapLatest(() => U.thru(
+      docEvents.move,
+      U.takeUntilBy(
+        U.takeFirst(
+          1,
+          observeEvent('mouseup', document).toProperty(),
+        )
+      )
+    )),
+  ).log('dragg');
+
   return (
     <div className="App">
+      <div
+        className="draggableIndicator"
+        style={{
+          width: 10,
+          height: 10,
+        }}
+      />
+
       <div
         className="draggableOrigo"
         style={{
@@ -53,8 +75,8 @@ function App() {
           height: 10,
           border: 'solid 2px #00f',
           position: 'absolute',
-          left: U.view(0, c),
-          top: U.view(1, c),
+          left: U.view(0, refOrigo),
+          top: U.view(1, refOrigo),
         }}
       />
       <div
@@ -64,8 +86,8 @@ function App() {
           width: 10,
           height: 10,
           position: 'absolute',
-          left: U.view(0, a),
-          top: U.view(1, a),
+          left: U.view(0, refClickPXY),
+          top: U.view(1, refClickPXY),
         }}
       />
       <div
@@ -84,8 +106,8 @@ function App() {
             marginTop: -5,
             position: 'absolute',
             border: 'dashed 2px #f0f',
-            left: U.view(0, b),
-            top: U.view(1, b),
+            left: U.view(0, refClickRXY),
+            top: U.view(1, refClickRXY),
           }}
         />
         <div className="draggable__body">
