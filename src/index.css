@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -11,4 +15,24 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+html, body {
+  height: 100%;
+}
+
+.draggable {
+  position: absolute;
+  border: solid 2px #f00;
+  cursor: crosshair;
+}
+
+.draggable.locked {
+  border-color: #00f;
+}
+
+.draggable__body {
+  border: dashed 1px #f00;
+  height: 100%;
+  width: 100%;
 }
