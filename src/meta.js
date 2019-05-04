@@ -1,14 +1,14 @@
 import * as U from 'karet.util';
 import * as L from 'kefir.partial.lenses';
 
-const orFalse = L.define(false);
-const orZero = L.define(0);
+// const orFalse = L.define(false);
+// const orZero = L.define(0);
 const orString = L.define('');
 
 const propOrDefault = d => p => [p, L.define(d)];
 const propOrZero = propOrDefault(0);
 const propOrFalse = propOrDefault(false);
-const propOrString = propOrDefault('');
+// const propOrString = propOrDefault('');
 
 export const GeometryL = L.pick({
   width: propOrZero('width'),
@@ -29,6 +29,8 @@ export const DraggableL = L.pick({
   flags: ['flags', FlagsL],
   content: ['content', orString],
 });
+
+export const ArrayDraggableL = L.array(DraggableL);
 
 //
 

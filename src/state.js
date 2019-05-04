@@ -15,6 +15,9 @@ export const mkStoredState = (initial = {}, options = {}) => Stored({
 })
 
 export const initialState = {
+  flags: {
+    ghost: false,
+  },
   items: [
     {
       geometry: {
