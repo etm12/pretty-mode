@@ -6,6 +6,13 @@ declare interface IDraggable {
   content: string;
 }
 
+declare interface IDraggableContentStyle {
+  fontSize?: number;
+  fontFamily?: string;
+  backgroundColor?: string;
+  textAlign?: 'left' | 'center' | 'right';
+}
+
 declare interface IDraggableGeometry {
   width: number;
   height: number;
@@ -24,4 +31,14 @@ declare interface IDraggableProps {
   geometry: IDraggableGeometry;
   flags: IDraggableFlags;
   content: string;
+  style: IDraggableContentStyle;
+}
+
+//
+
+declare interface IState {
+  defaults: {
+    style: IDraggableContentStyle;
+  };
+  items: Array<IDraggableProps>;
 }
