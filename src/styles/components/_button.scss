@@ -1,0 +1,9 @@
+$theme-button-background: #fff !default;
+$theme-button-border: solid 2px #f00 !default;
+$theme-button-text-color: #000 !default;
+
+@mixin make-button() {
+  background: $theme-button-background;
+  border: $theme-button-border;
+  color: $theme-button-text-color;
+}

@@ -1,0 +1,13 @@
+.controls {
+  border: dashed 1px #f00;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 5rem;
+}
+
+.controlGroup {
+  border: dashed 1px #00f;
+  display: grid;
+  grid-auto-rows: 2rem;
+}

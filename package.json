@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "atom.storage": "^0.5.5",
     "karet": "^4.1.0",
     "karet.util": "^0.19.1",
     "kefir": "^3.8.6",
@@ -34,6 +35,7 @@
     ]
   },
   "devDependencies": {
-    "@types/kefir": "^3.8.1"
+    "@types/kefir": "^3.8.1",
+    "node-sass": "^4.12.0"
   }
 }

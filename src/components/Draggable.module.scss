@@ -1,0 +1,57 @@
+@import '../styles/base';
+
+.draggable {
+  position: absolute;
+
+  display: grid;
+  grid-template-rows: 1.5rem auto 1.5rem;
+  background: #fff;
+  box-shadow: 0 .1rem .2rem rgba(0, 0, 0, .3);
+}
+
+.editing {
+  border: solid 2px #f00;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+}
+
+.header > * {
+  border: dashed 1px #f00;
+}
+
+/**/
+
+.headerTitle {
+  flex: 1;
+}
+
+.headerControls {
+  border: solid 2px #00f;
+}
+
+/**/
+
+.footer {
+  border: dashed 1px #00f;
+  display: flex;
+}
+
+/**/
+
+.content {
+
+}
+
+.enabled {
+  border: solid 2px #f00;
+}
+
+.contentContainer {
+  border: dashed 2px #f00;
+  display: grid;
+  height: 100%;
+}

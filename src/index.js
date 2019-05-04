@@ -1,24 +1,21 @@
 // @ts-check
 import * as React from 'karet';
-import * as U from 'karet.util';
+// eslint-disable-next-line
 import * as K from 'kefir';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { observeEvent } from './utils';
+import mkState, { mkStoredState, initialState } from './state';
 
-/**
- * @type {Object.<string, K.Property<Event, any>>}
- */
-const docEvents = {
-  move: observeEvent('mousemove', document),
-};
+const state = mkStoredState(initialState);
+
+console.log(state);
 
 ReactDOM.render(
   <App
-    docEvents={docEvents}
+    state={state}
   />,
   document.getElementById('root'),
 );

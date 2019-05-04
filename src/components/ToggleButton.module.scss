@@ -1,0 +1,9 @@
+@import '../styles/base.scss';
+
+.button {
+  @include make-button();
+}
+
+.toggled {
+  border: solid 1px #f00;
+}
