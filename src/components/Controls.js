@@ -18,10 +18,10 @@ const Controls = ({ items, flags }) => {
         S.controlGroup,
       )}>
         <button onClick={appendNewItem}>
-          Add new
+          <i className="material-icons">create</i>
         </button>
         <button onClick={toggleGhostMode}>
-          Ghost
+          <i className="material-icons">crop_free</i>
         </button>
       </div>
     </div>
