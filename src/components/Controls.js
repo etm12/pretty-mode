@@ -1,9 +1,15 @@
 import * as React from 'karet';
 import * as U from 'karet.util';
+import * as R from 'kefir.ramda';
+import * as L from 'kefir.partial.lenses';
 
-import S from './Controls.module.css';
+import S from './Controls.module.scss';
 
-const Controls = ({ items }) => {
+const Controls = ({ items, flags }) => {
+  const defaultItem = { geometry: { width: 160, height: 220 } };
+  const appendNewItem = U.doSet(U.view(L.appendTo, items), defaultItem);
+  const toggleGhostMode = U.doModify(U.view('ghost', flags), R.not);
+
   return (
     <div className={U.cns(
       S.controls,
@@ -11,10 +17,10 @@ const Controls = ({ items }) => {
       <div className={U.cns(
         S.controlGroup,
       )}>
-        <button>
+        <button onClick={appendNewItem}>
           Add new
         </button>
-        <button>
+        <button onClick={toggleGhostMode}>
           Ghost
         </button>
       </div>
