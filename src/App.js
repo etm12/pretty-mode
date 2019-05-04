@@ -1,16 +1,38 @@
+/**
+ * @module App
+ */
 import * as React from 'karet';
 import * as U from 'karet.util';
+import * as L from 'kefir.partial.lenses';
+
+import S from './App.module.scss';
 
 import Draggable from './components/Draggable';
 import Controls from './components/Controls';
 import * as M from './meta';
 
-function App ({ state }) {
+/**
+ * @param {Props} props
+ * @return {JSX.Element}
+ */
+export default function App ({ state }) {
+  const items = U.view(['items', M.ArrayDraggableL], state);
+  const flags = U.view('flags', state);
+
   return (
-    <div className="App">
-      <Controls />
+    <div
+      className={U.cns(
+        'App',
+        U.when(U.view('ghost', flags), S.ghostMode)
+      )}
+    >
+      <Controls
+        items={items}
+        flags={flags}
+      />
+
       {U.thru(
-        U.view('items', state),
+        U.view(['items', L.array(M.DraggableL)], state),
         U.mapElems((it, i) =>
           <Draggable
             key={i}
@@ -24,4 +46,9 @@ function App ({ state }) {
   );
 }
 
-export default App;
+//
+
+/**
+ * @typedef {object} Props
+ * @prop {any} state
+ */
