@@ -4,7 +4,7 @@ import * as R from 'kefir.ramda';
 
 import S from './ToggleButton.module.scss';
 
-const ToggleButton = ({ value, children, enabled = true }) =>
+const ToggleButton = ({ value, children }) =>
   <button
     className={U.cns(
       S.button,
