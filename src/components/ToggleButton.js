@@ -1,14 +1,17 @@
+/**
+ * @module ToggleButton
+ * @namespace App.Components
+ */
 import * as React from 'karet';
 import * as U from 'karet.util';
 import * as R from 'kefir.ramda';
 
-import S from './ToggleButton.module.scss';
-
-const ToggleButton = ({ value, children }) =>
+const ToggleButton = ({ value, title, children }) =>
   <button
+    title={title}
     className={U.cns(
-      S.button,
-      U.when(value, S.toggled),
+      'button',
+      U.when(value, 'button--toggled'),
     )}
     onClick={U.doModify(value, R.not)}
   >
