@@ -7,7 +7,7 @@ import { xyToTranslate } from '../utils';
 import { observeMouseDown, observeMouseMove, observeMouseUp } from '../global-events';
 import S from './Draggable.module.scss';
 
-import Style from './Style';
+// import Style from './Style';
 import ToggleButton from './ToggleButton';
 
 /**
@@ -17,7 +17,6 @@ function Draggable ({ geometry, flags, content, style }) {
   const ref = U.variable();
   const refClick = observeMouseDown(ref);
 
-  const { width, height, x, y } = U.destructure(geometry);
   const { locked, moving, editing, styling } = U.destructure(flags);
 
   const position = U.view(L.props('x', 'y'), geometry);
@@ -85,14 +84,23 @@ function Draggable ({ geometry, flags, content, style }) {
         )}>
           {U.unless(
             editing,
-            content,
+            <div
+              className={S.contentDisplay}
+              style={style}
+            >
+              {content}
+            </div>,
           )}
 
           {U.when(
             editing,
             <textarea
               defaultValue={content}
-              onInput={e => content.set(e.target.value)}
+              style={{ fontSize: 12 }}
+              onInput={U.through(
+                U.view(['target', 'value', L.valueOr('lol empty')]),
+                U.set(content)
+              )}
             />,
           )}
         </div>
