@@ -1,3 +1,28 @@
+declare module 'karet';
+declare module 'karet.util';
+declare module 'kefir.ramda';
+declare module 'kefir.partial.lenses';
+
+declare namespace App {
+  namespace Component {
+    namespace Draggable {
+      interface Props {
+        geometry: IDraggableGeometry;
+        flags: IDraggableFlags;
+        content: string;
+        style: IDraggableContentStyle;
+      }
+    }
+
+    namespace Icon {
+      interface Props {
+        size?: 'small' | 'normal' | 'large';
+        children: any;
+      }
+    }
+  }
+}
+
 declare interface IDraggable {
   size: { width: number, height: number };
   position: { x: number, y: number };
