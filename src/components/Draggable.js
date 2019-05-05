@@ -5,14 +5,12 @@ import * as L from 'kefir.partial.lenses';
 
 import { xyToTranslate } from '../utils';
 import { observeMouseDown, observeMouseMove, observeMouseUp } from '../global-events';
-// import S from './Draggable.module.scss';
 
-// import Style from './Style';
 import ToggleButton from './ToggleButton';
 import Icon from './Icon';
 
 /**
- * @param {Props} props
+ * @param {import('./Draggable').IProps} props
  */
 function Draggable ({ geometry, flags, content, style }) {
   const ref = U.variable();
@@ -56,6 +54,7 @@ function Draggable ({ geometry, flags, content, style }) {
         U.when(moving, 'moving'),
       )}
     >
+      {U.sink(updateDragCoords)}
       <header
         className={U.cns('draggable-header')}
       >
@@ -106,10 +105,6 @@ function Draggable ({ geometry, flags, content, style }) {
         'draggable-content',
         U.when(editing, 'editing'),
       )}>
-        <React.Fragment>
-          {U.sink(updateDragCoords)}
-        </React.Fragment>
-
         <div className="draggable-content__container">
           {U.unless(
             editing,
@@ -126,7 +121,7 @@ function Draggable ({ geometry, flags, content, style }) {
               style={{ fontSize: 12 }}
               onInput={U.through(
                 U.view(['target', 'value', L.valueOr('lol empty')]),
-                U.set(content)
+                U.set(content),
               )}
             />,
           )}
