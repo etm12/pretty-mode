@@ -1,15 +1,9 @@
 import * as React from 'karet';
 import * as U from 'karet.util';
 
-import S from './Style.module.css';
-
 const Style = () => {
   return (
-    <div
-      className={U.cns(
-        S.style,
-      )}
-    >
+    <div className="style">
       <header>
         Style
       </header>
@@ -19,7 +13,7 @@ const Style = () => {
           <header>
             Text
           </header>
-          <dl className={S.controls}>
+          <dl className="style-controls">
             <dt>Font size</dt>
             <dd>16</dd>
           </dl>
@@ -28,7 +22,7 @@ const Style = () => {
         <fieldset>
           <legend>Background</legend>
 
-          <dl className={S.controls}>
+          <dl className="style-controls">
             <dt>Color</dt>
             <dd>
               <input type="color" value="#ff0000" />
