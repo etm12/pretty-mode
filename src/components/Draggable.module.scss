@@ -1,12 +1,23 @@
 @import '../styles/base';
 
+$theme-draggable-header-height: 1.5rem !default;
+$theme-draggable-footer-height: 2rem !default;
+
+$theme-draggable-footer-button-height: 1.75rem !default;
+$theme-draggable-footer-button-width: 1.75rem !default;
+
+$theme-draggable-content-padding: .4rem !default;
+
+$theme-draggable-border-color: rgba(0, 0, 0, .23) !default;
+
 .draggable {
   position: absolute;
 
   display: grid;
-  grid-template-rows: 1.5rem auto 1.5rem;
+  grid-template-rows: $theme-draggable-header-height auto $theme-draggable-footer-height;
   background: #fff;
   box-shadow: 0 .1rem .2rem rgba(0, 0, 0, .3);
+  border: solid 2px $theme-draggable-border-color;
 }
 
 .editing {
@@ -17,37 +28,38 @@
   display: flex;
   align-items: center;
   height: 1.5rem;
-}
-
-.header > * {
-  border: dashed 1px #f00;
+  user-select: none;
+  border-bottom: solid 2px $theme-draggable-border-color;
+  padding: 0 $theme-draggable-content-padding;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 /**/
 
 .headerTitle {
   flex: 1;
-}
-
-.headerControls {
-  border: solid 2px #00f;
+  font-size: .875rem;
 }
 
 /**/
 
 .footer {
-  border: dashed 1px #00f;
   display: flex;
+}
+
+.footerButtonGroup {
 }
 
 /**/
 
 .content {
-
+  padding: $theme-draggable-content-padding;
 }
 
 .contentDisplay {
   white-space: pre-wrap;
+  font-size: 0.875rem;
 }
 
 .enabled {
@@ -55,7 +67,4 @@
 }
 
 .contentContainer {
-  border: dashed 2px #f00;
-  display: grid;
-  height: 100%;
 }

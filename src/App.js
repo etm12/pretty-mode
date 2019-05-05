@@ -5,8 +5,6 @@ import * as React from 'karet';
 import * as U from 'karet.util';
 import * as L from 'kefir.partial.lenses';
 
-import S from './App.module.scss';
-
 import Draggable from './components/Draggable';
 import Controls from './components/Controls';
 import * as M from './meta';
@@ -22,8 +20,8 @@ export default function App ({ state }) {
   return (
     <div
       className={U.cns(
-        'App',
-        U.when(U.view('ghost', flags), S.ghostMode)
+        'app',
+        U.when(U.view('ghost', flags), 'app--ghost-mode')
       )}
     >
       <Controls

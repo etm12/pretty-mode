@@ -1,0 +1,14 @@
+$theme-icon-size-base: 1.5rem !default; // 24px
+
+$theme-icon-size-small: $theme-icon-size-base * .7 !default;
+$theme-icon-size-normal: $theme-icon-size-base !default;
+
+$theme-icon-sizes: (
+  small: .8,
+  normal: 1,
+  large: 1.2,
+);
+
+.small {
+  font-size: $theme-icon-size-small;
+}

@@ -5,10 +5,11 @@ import * as L from 'kefir.partial.lenses';
 
 import { xyToTranslate } from '../utils';
 import { observeMouseDown, observeMouseMove, observeMouseUp } from '../global-events';
-import S from './Draggable.module.scss';
+// import S from './Draggable.module.scss';
 
 // import Style from './Style';
 import ToggleButton from './ToggleButton';
+import Icon from './Icon';
 
 /**
  * @param {Props} props
@@ -31,14 +32,13 @@ function Draggable ({ geometry, flags, content, style }) {
     })
   );
 
-  const mouseMoveUntilUp = U.flatMapLatest(() => U.thru(
+  const onDrag = U.flatMapLatest(() => U.thru(
     observeMouseMove(),
     U.takeUntilBy(
       U.takeFirst(1, observeMouseUp()),
     ),
-  ));
+  ), refClick);
 
-  const onDrag = mouseMoveUntilUp(refClick);
   const dragPageCoords = U.mapValue(R.props(['pageX', 'pageY']), onDrag);
 
   const updateDragCoords = U.thru(
@@ -51,43 +51,70 @@ function Draggable ({ geometry, flags, content, style }) {
     <article
       style={_style}
       className={U.cns(
-        S.draggable,
+        'draggable',
         U.when(locked, 'locked'),
         U.when(moving, 'moving'),
       )}
     >
       <header
-        className={U.cns(
-          S.header,
-        )}
+        className={U.cns('draggable-header')}
       >
         <div
-          className={U.cns(S.headerTitle)}
+          className={U.cns('draggable-header__title')}
           ref={U.refTo(ref)}
         >
-          Note
+          Item
         </div>
+
+        <aside className="draggable-controls">
+          <div className="draggable-controls__button-group">
+            <ToggleButton
+              value={locked}
+              title={U.ifElse(locked, 'Unlock', 'Lock')}
+            >
+              <Icon size="small">lock</Icon>
+            </ToggleButton>
+
+            <ToggleButton
+              value={editing}
+              title={U.ifElse(editing, 'Stop editing', 'Edit')}
+            >
+              <Icon size="small">edit</Icon>
+            </ToggleButton>
+
+            <ToggleButton
+              value={styling}
+              title={U.ifElse(styling, 'Done styling', 'Style')}
+            >
+              <Icon size="small">palette</Icon>
+            </ToggleButton>
+          </div>
+
+          <div className="draggable-controls__button-group">
+            <ToggleButton>
+              <Icon size="small">vertical_align_top</Icon>
+            </ToggleButton>
+
+            <ToggleButton>
+              <Icon size="small">vertical_align_bottom</Icon>
+            </ToggleButton>
+          </div>
+        </aside>
       </header>
 
-      <div
-        className={U.cns(
-          S.content,
-          U.when(editing, S.editing),
-        )}
-      >
+      <div className={U.cns(
+        'draggable-content',
+        U.when(editing, 'editing'),
+      )}>
         <React.Fragment>
           {U.sink(updateDragCoords)}
         </React.Fragment>
 
-        <div className={U.cns(
-          S.contentContainer,
-        )}>
+        <div className="draggable-content__container">
           {U.unless(
             editing,
-            <div
-              className={S.contentDisplay}
-              style={style}
-            >
+            <div className="draggable-content__show-content"
+                 style={style}>
               {content}
             </div>,
           )}
@@ -106,18 +133,8 @@ function Draggable ({ geometry, flags, content, style }) {
         </div>
       </div>
 
-      <footer className={U.cns(S.footer)}>
-        <aside className={U.cns(S.headerControls)}>
-          <ToggleButton value={locked}>
-            {U.ifElse(locked, 'Unlock', 'Lock')}
-          </ToggleButton>
-          <ToggleButton value={editing}>
-            {U.ifElse(editing, 'Stop editing', 'Edit')}
-          </ToggleButton>
-          <ToggleButton value={styling}>
-            {U.ifElse(styling, 'Done styling', 'Style')}
-          </ToggleButton>
-        </aside>
+      <footer className="draggable-footer">
+
       </footer>
     </article>
   );
