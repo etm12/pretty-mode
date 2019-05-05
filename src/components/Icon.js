@@ -1,8 +1,9 @@
 import * as React from 'karet';
 import * as U from 'karet.util';
 
-import S from './Icon.module.scss';
-
+/**
+ * @param {App.Component.Icon.Props} props
+ */
 const Icon = ({ children, size }) =>
   <i className={U.cns(
     'material-icons',
