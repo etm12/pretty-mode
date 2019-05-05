@@ -1,0 +1,92 @@
+$theme-draggable-header-height: 1.5rem !default;
+$theme-draggable-footer-height: 2rem !default;
+
+$theme-draggable-footer-button-height: $base-size * 4 !default;
+$theme-draggable-footer-button-width: $base-size * 4 !default;
+
+$theme-draggable-border-color: rgba(0, 0, 0, .23) !default;
+
+$draggable-header-height: $base-size * 4;
+$draggable-content-height: auto;
+$draggable-footer-height: $base-size * 4;
+
+.draggable {
+  position: absolute;
+
+  display: grid;
+  grid-template-rows: $draggable-header-height $draggable-content-height $draggable-footer-height;
+  background: $ui-01;
+  box-shadow: 0 ($base-size / 2) ($base-size) rgba(0, 0, 0, .2);
+
+  &:hover {
+    box-shadow: 0 ($base-size) ($base-size * 2) rgba(0, 0, 0, .2);
+  }
+}
+
+//
+
+.draggable-header {
+  display: flex;
+  background: $ui-03;
+  align-items: center;
+  user-select: none;
+  padding: 0 $base-spacing;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.draggable-header__title {
+  flex: 1;
+  font-size: .875rem;
+}
+
+//
+
+.draggable-footer {
+}
+
+.draggable:hover {
+  .draggable-controls {
+    display: grid;
+  }
+}
+
+.draggable-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+  grid-gap: $base-spacing;
+  transform: translateX(100%);
+  padding: 0 $base-spacing $base-spacing;
+
+  button {
+    width: $theme-draggable-footer-button-height;
+    height: $theme-draggable-footer-button-height;
+    padding: 0;
+  }
+}
+
+.draggable-controls__button-group {
+  white-space: nowrap;
+}
+
+//
+
+.draggable-content {
+  padding: $base-spacing;
+}
+
+.draggable-content__container {
+  display: grid;
+  height: 100%;
+}
+
+.draggable-content__show-content {
+  white-space: pre-wrap;
+  font-size: 0.875rem;
+}
+
+.draggable-content.editing {
+
+}

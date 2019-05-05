@@ -1,0 +1,19 @@
+$theme-button-background: $color-gray-10 !default;
+$theme-button-hover-background: $color-primary-light !default;
+$theme-button-border: solid 1px $color-primary-dark !default;
+$theme-button-text-color: $color-text-primary;
+
+@mixin make-button () {
+  background: $interactive-01;
+  color: $text-04;
+  border: 0;
+
+  &:hover {
+    background: $hover-primary;
+  }
+
+  &:active,
+  &.button--active {
+    background: $active-primary;
+  }
+}

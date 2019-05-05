@@ -1,0 +1,68 @@
+$font-family-sans-serif: 'IBM Plex Sans', sans-serif;
+$font-family-serif: 'IBM Plex Serif', serif;
+$font-family-monospace: 'IBM Plex Mono', monospace;
+
+$font-family-base: $font-family-sans-serif;
+
+$font-size-base: 1rem;
+
+$theme: $carbon--theme--white;
+
+//
+
+$color-primary: #6a1b9a;
+$color-primary-light: #9c4dcc;
+$color-primary-dark: #38006b;
+
+$color-secondary: #e040fb;
+$color-secondary-light: #ff79ff;
+$color-secondary-dark: #aa00c7;
+
+$color-text-primary: #ffffff;
+$color-text-secondary: #000000;
+
+$color-white: #ffffff;
+$color-gray-10: #f3f3f3;
+$color-gray-20: #dcdcdc;
+$color-gray-50: #8c8c8c;
+$color-gray-70: #565656;
+$color-gray-90: #282828;
+$color-gray-100: #171717;
+
+$color-blue-60: #0062ff;
+
+$ui-background: map-get($theme, ui-background);
+$interactive-01: map-get($theme, interactive-01);
+$interactive-02: map-get($theme, interactive-02);
+$interactive-03: map-get($theme, inveractive-03);
+
+$ui-01: $color-gray-10;
+$ui-02: $color-white;
+$ui-03: $color-gray-20;
+$ui-04: $color-gray-50;
+$ui-05: $color-gray-100;
+$ui-hover: map-get($theme, ui-hover);
+
+$hover-primary: map-get($theme, hover-primary);
+$active-primary: map-get($theme, active-primary);
+
+$text-01: map-get($theme, text-01);
+$text-02: map-get($theme, text-02);
+$text-03: map-get($theme, text-03);
+$text-04: map-get($theme, text-04);
+
+$link-01: map-get($theme, link-01);
+
+//
+
+$base-spacing: 0.5rem; // 8px
+$base-size: 0.5rem; // 8px
+
+$screen-border-spacing: $base-spacing * .5;
+
+//
+
+$icon-size-base: 1.5rem;
+
+$icon-size-small: $icon-size-base * .8;
+$icon-size-normal: $icon-size-base;

@@ -1,0 +1,26 @@
+$theme-overlay-controls-width: 3rem !default;
+$theme-overlay-controls-position-top: $screen-border-spacing;
+$theme-overlay-controls-position-right: $screen-border-spacing;
+
+$theme-overlay-controls-button-height: $base-size * 4;
+$theme-overlay-controls-button-width: $base-size * 4;
+
+.control-group {
+  display: grid;
+  grid-gap: $base-spacing;
+  grid-auto-rows: $theme-overlay-controls-button-height;
+}
+
+.controls .control-group {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  margin: $base-spacing;
+
+  button {
+    height: $base-size * 4;
+    width: $base-size * 4;
+    padding: 0;
+  }
+}

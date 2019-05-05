@@ -1,0 +1,13 @@
+$icon-sizes: (
+  small: .75,
+  normal: 1,
+  large: 1.25,
+);
+
+.icon {
+  @each $size, $val in $icon-sizes {
+    &.icon--#{$size} {
+      font-size: $font-size-base * $val;
+    }
+  }
+}
