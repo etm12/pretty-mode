@@ -1,9 +1,7 @@
-declare module 'karet';
-declare module 'karet.util';
-declare module 'kefir.ramda';
-declare module 'kefir.partial.lenses';
-
 declare namespace App {
+  namespace Utils {
+    function not<T>(v: T): boolean;
+  }
   namespace Component {
     namespace Draggable {
       interface Props {
@@ -20,8 +18,23 @@ declare namespace App {
         children: any;
       }
     }
+
+    namespace ResizeHandles {
+      interface Props {
+        directions?: ResizeDirections;
+        geometry?: IDraggableGeometry;
+      }
+    }
+
+    namespace Markdown {
+      interface Props {
+        children: (JSX.Element | JSX.Element[]);
+      }
+    }
   }
 }
+
+declare type ResizeDirections = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w';
 
 declare interface IDraggable {
   size: { width: number, height: number };
@@ -29,6 +42,7 @@ declare interface IDraggable {
   locked: boolean;
   moving?: boolean;
   content: string;
+  style?: any;
 }
 
 declare interface IDraggableContentStyle {
@@ -67,3 +81,13 @@ declare interface IState {
   };
   items: Array<IDraggableProps>;
 }
+
+// LIBRARIES
+
+declare module 'karet';
+
+declare module 'karet.util';
+
+declare module 'kefir.ramda';
+declare module 'kefir.partial.lenses';
+

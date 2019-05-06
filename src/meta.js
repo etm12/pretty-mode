@@ -28,6 +28,7 @@ export const DraggableL = L.pick({
   geometry: ['geometry', GeometryL],
   flags: ['flags', FlagsL],
   content: ['content', orString],
+  style: ['style'],
 });
 
 export const ArrayDraggableL = L.array(DraggableL);

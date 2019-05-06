@@ -27,7 +27,10 @@ export const initialState = {
         y: 300,
       },
       flags: {},
-      content: 'haha lol',
+      content: 'A huge boi',
+      style: {
+        fontSize: 32,
+      }
     },
   ],
 };

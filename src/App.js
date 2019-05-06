@@ -16,6 +16,7 @@ import * as M from './meta';
 export default function App ({ state }) {
   const items = U.view(['items', M.ArrayDraggableL], state);
   const flags = U.view('flags', state);
+  state.log('state');
 
   return (
     <div

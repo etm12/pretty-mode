@@ -1,5 +1,6 @@
 // @ts-check
 import * as React from 'karet';
+
 // eslint-disable-next-line
 import * as K from 'kefir';
 import * as U from 'karet.util';
