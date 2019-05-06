@@ -10,6 +10,26 @@ $draggable-header-height: $base-size * 4;
 $draggable-content-height: auto;
 $draggable-footer-height: $base-size * 4;
 
+.app--ghost-mode .draggable {
+  border: dashed 2px #f00;
+
+  .draggable-header,
+  .draggable-content,
+  .draggable-footer {
+    opacity: .1;
+  }
+
+  .draggable-controls {
+    display: none;
+  }
+
+  &:hover {
+    .draggable-controls {
+      display: none;
+    }
+  }
+}
+
 .draggable {
   border: dashed 1px #f00;
   position: absolute;
