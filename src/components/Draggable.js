@@ -11,8 +11,6 @@ import Icon from './Icon';
 import ResizeHandles from './ResizeHandles';
 import Markdown from './Markdown';
 
-const resizeDirections = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
-
 /**
  * @param {App.Component.Draggable.Props} props
  */
@@ -115,8 +113,10 @@ function Draggable ({ geometry, flags, content, style }) {
         <div className="draggable-content__container">
           {U.unless(
             editing,
-            <div className="draggable-content__show-content"
-                 style={style}>
+            <div
+              className="draggable-content__show-content"
+              style={style}
+            >
               <Markdown>{content}</Markdown>
             </div>,
           )}
@@ -137,6 +137,20 @@ function Draggable ({ geometry, flags, content, style }) {
 
       <footer className="draggable-footer">
         <div className="draggable-footer__primary-info primary-info">
+          <div className="primary-info__item">
+            {U.thru(
+              geometry,
+              U.mapValue(R.pipe(
+                R.props(['x', 'y']),
+                R.zip(['x', 'y']),
+                R.map(R.join(' = ')),
+                R.join(', '),
+                R.concat('('),
+                R.concat(R.__, ')'),
+              )),
+              U.show,
+            )}
+          </div>
         </div>
         <aside className="draggable-footer__secondary-info secondary-info">
           <div className="secondary-info__item">
