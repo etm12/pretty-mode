@@ -1,5 +1,5 @@
 $theme-draggable-header-height: 1.5rem !default;
-$theme-draggable-footer-height: 2rem !default;
+$theme-draggable-footer-height: 1rem !default;
 
 $theme-draggable-footer-button-height: $base-size * 4 !default;
 $theme-draggable-footer-button-width: $base-size * 4 !default;
@@ -11,6 +11,7 @@ $draggable-content-height: auto;
 $draggable-footer-height: $base-size * 4;
 
 .draggable {
+  border: dashed 1px #f00;
   position: absolute;
 
   display: grid;
@@ -43,7 +44,27 @@ $draggable-footer-height: $base-size * 4;
 //
 
 .draggable-footer {
+  font-size: 0.875rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0 8px;
+  color: $text-03;
+
+  .primary-info,
+  .secondary-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .secondary-info {
+    .secondary-info__item {
+      text-align: right;
+      flex: 1;
+    }
+  }
 }
+
+//
 
 .draggable:hover {
   .draggable-controls {
@@ -89,4 +110,64 @@ $draggable-footer-height: $base-size * 4;
 
 .draggable-content.editing {
 
+}
+
+//
+
+@mixin offset-xy ($x, $y) {
+  transform: translateX($x) translateY($y);
+}
+
+$resize-handle-positions: (
+  nw: (left: 0, top: 0),
+  n: (left: 50%, top: 0),
+  ne: (right: 0, top: 0),
+  e: (right: 0, top: 50%),
+  se: (right: 0, bottom: 0),
+  s: (left: 50%, bottom: 0),
+  sw: (left: 0, bottom: 0),
+  w: (left: 0, top: 50%),
+);
+
+.resize {
+  position: absolute;
+  width: .5rem;
+  height: .5rem;
+  background: rgba(255, 0, 0, .3);
+  border: dashed 1px #f00;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    &::after {
+      background-color: rgba(0, 0, 255, .3);
+    }
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    left: -150%;
+    top: -150%;
+    width: 400%;
+    height: 400%;
+    // background: rgba(255, 0, 0, .3);
+  }
+
+  @each $dir, $values in $resize-handle-positions {
+    &.resize--#{$dir} {
+      @each $prop, $value in $values {
+        #{$prop}: $value;
+      }
+    }
+  }
+
+  &.resize--nw { @include offset-xy(-50%, -50%) }
+  &.resize--n { @include offset-xy(-50%, -50%) }
+  &.resize--ne { @include offset-xy(50%, -50%) }
+  &.resize--e { @include offset-xy(50%, -50%) }
+  &.resize--se { @include offset-xy(50%, 50%) }
+  &.resize--s { @include offset-xy(-50%, 50%) }
+  &.resize--sw { @include offset-xy(-50%, 50%) }
+  &.resize--w { @include offset-xy(-50%, -50%) }
 }
