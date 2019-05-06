@@ -14,11 +14,33 @@ export default function Controls ({ items, flags }) {
   return (
     <div className="controls">
       <div className="control-group control-group--vertical">
-        <button className="button" onClick={appendNewItem}>
+        <button
+          className={U.cns(
+            'button',
+          )}
+          onClick={appendNewItem}
+          title="Create new item"
+        >
           <i className="material-icons">create</i>
         </button>
-        <button className="button" onClick={toggleGhostMode}>
+        <button
+          className={U.cns(
+            'button',
+            U.when(U.view('ghost', flags), 'button--active'),
+          )}
+          onClick={toggleGhostMode}
+          title="Toggle outline mode"
+        >
           <i className="material-icons">crop_free</i>
+        </button>
+        <button
+          className={U.cns(
+            'button',
+          )}
+          title="Toggle global lock"
+          disabled
+        >
+          <i className="material-icons">lock</i>
         </button>
       </div>
     </div>
