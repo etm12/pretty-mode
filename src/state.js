@@ -8,7 +8,7 @@ export default mkState;
 //
 
 export const mkStoredState = (initial = {}, options = {}) => Stored({
-  key: 'pretty-mode:v1',
+  key: 'pretty-mode:v2',
   value: initial,
   Atom: U.atom,
   storage: localStorage,
@@ -27,10 +27,32 @@ export const initialState = {
         y: 300,
       },
       flags: {},
-      content: 'A huge boi',
+      content: 'Large text',
       style: {
         fontSize: 32,
       }
+    },
+    {
+      geometry: {
+        width: 250,
+        height: 250,
+        x: 100,
+        y: 100,
+      },
+      flags: {},
+      content: 'Regular text',
+      style: {},
+    },
+    {
+      geometry: {
+        width: 250,
+        height: 250,
+        x: 300,
+        y: 150,
+      },
+      flags: {},
+      content: '### Some markdown\n\n * List item\n * Another one',
+      style: {},
     },
   ],
 };
