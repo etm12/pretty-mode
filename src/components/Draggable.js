@@ -8,9 +8,13 @@ import { observeMouseDown, observeMouseMove, observeMouseUp } from '../global-ev
 
 import ToggleButton from './ToggleButton';
 import Icon from './Icon';
+import ResizeHandles from './ResizeHandles';
+import Markdown from './Markdown';
+
+const resizeDirections = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
 
 /**
- * @param {import('./Draggable').IProps} props
+ * @param {App.Component.Draggable.Props} props
  */
 function Draggable ({ geometry, flags, content, style }) {
   const ref = U.variable();
@@ -55,6 +59,9 @@ function Draggable ({ geometry, flags, content, style }) {
       )}
     >
       {U.sink(updateDragCoords)}
+
+      {U.when(geometry, <ResizeHandles geometry={geometry} />)}
+
       <header
         className={U.cns('draggable-header')}
       >
@@ -110,7 +117,7 @@ function Draggable ({ geometry, flags, content, style }) {
             editing,
             <div className="draggable-content__show-content"
                  style={style}>
-              {content}
+              <Markdown>{content}</Markdown>
             </div>,
           )}
 
@@ -129,7 +136,20 @@ function Draggable ({ geometry, flags, content, style }) {
       </div>
 
       <footer className="draggable-footer">
-
+        <div className="draggable-footer__primary-info primary-info">
+        </div>
+        <aside className="draggable-footer__secondary-info secondary-info">
+          <div className="secondary-info__item">
+            {U.thru(
+              geometry,
+              U.mapValue(R.pipe(
+                R.props(['width', 'height']),
+                R.intersperse('×'),
+                R.join(' '),
+              )),
+            )}
+          </div>
+        </aside>
       </footer>
     </article>
   );
