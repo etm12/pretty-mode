@@ -16,4 +16,10 @@ $theme-button-text-color: $color-text-primary;
   &.button--active {
     background: $active-primary;
   }
+
+  &:disabled,
+  &.button--disabled {
+    background: $disabled-02;
+    cursor: not-allowed;
+  }
 }
