@@ -17,8 +17,6 @@ const Handle = ({ direction, geometry, handler }) => {
   const ref = U.variable();
   const refClick = observeMouseDown(ref);
 
-  const { width, x } = U.destructure(geometry);
-
   const onDrag = U.flatMapLatest(() => U.thru(
     observeMouseMove(),
     U.takeUntilBy(
@@ -29,6 +27,7 @@ const Handle = ({ direction, geometry, handler }) => {
   const refDragCoords = pageCoordsFrom(onDrag);
 
   const geometryOffset = U.mapValue(R.props(['x', 'y']), geometry);
+  // eslint-disable-next-line
   const geometrySize = U.mapValue(R.props(['width', 'height']), geometry);
 
   const refNewSize = U.thru(
@@ -40,8 +39,10 @@ const Handle = ({ direction, geometry, handler }) => {
     )),
   );
 
+  /* eslint-disable */
   const refNewWidth = takeUniqueWith(R.head, refNewSize);
   const refNewHeight = takeUniqueWith(R.last, refNewSize);
+  /* eslint-enable */
 
   return (
     <div
@@ -54,17 +55,13 @@ const Handle = ({ direction, geometry, handler }) => {
 /**
  * @param {App.Component.ResizeHandles.Props} props
  */
-const ResizeHandles = ({ geometry, directions = resizeDirections }) => {
-  console.log('ResizeHandles:geometry = %O', geometry);
-  return (
-    <React.Fragment>
-      {U.thru(
-        directions,
-        U.mapElems((d, di) =>
-          <Handle key={di} direction={d} geometry={geometry} />),
-      )}
-    </React.Fragment>
-  )
-};
+const ResizeHandles = ({ geometry, directions = resizeDirections }) =>
+  <React.Fragment>
+    {U.thru(
+      directions,
+      U.mapElems((d, di) =>
+        <Handle key={di} direction={d} geometry={geometry} />),
+    )}
+  </React.Fragment>;
 
 export default ResizeHandles;
